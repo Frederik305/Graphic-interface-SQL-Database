@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Google.Protobuf.WellKnownTypes;
+using MySql.Data.MySqlClient;
 using SqlFonctions;
 using System.Data;
 using System.Diagnostics;
@@ -84,5 +85,12 @@ public class DatabaseTools
             }
             else { }
         }
+    }
+    public class EditData
+    {
+        public string EditedColumnName { get; set; }
+        public string ChangedValues { get; set; }
+        public string ColumnNameID { get; set; }
+        public string ValueID { get; set; }
     }
 }

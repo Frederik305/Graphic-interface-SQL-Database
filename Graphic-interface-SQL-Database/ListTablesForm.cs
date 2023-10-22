@@ -1,11 +1,16 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.VisualBasic;
+using MySql.Data.MySqlClient;
 using SqlFonctions;
+using System.Text;
 using static DatabaseTools;
 
 namespace Form_Fontions
 {
     public partial class ListTablesForm : Form
     {
+        private List<EditData> editDataList = new List<EditData>();
+        private EditData entry = new EditData();
+
         private string query;
 
         private string changedValues;
@@ -191,15 +196,19 @@ namespace Form_Fontions
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            query = $"UPDATE {currentTable} SET {editedColumnName} = '{changedValues}' WHERE {columnNameID} = {valueID}";
+            foreach (EditData entry in editDataList)
+            {
+                string columnNameID = entry.ColumnNameID;
+                string valueID = entry.ValueID;
 
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+                string editedColumnName = entry.EditedColumnName;
+                string changedValue = entry.ChangedValues;
 
-            checkBox1.Checked = false;
-            checkBoxEdit.Checked = false;
+                query = $"UPDATE {currentTable} SET {editedColumnName} = '{changedValue}' WHERE {columnNameID} = {valueID}";
 
-            checkBox1.Enabled = false;
-            checkBoxEdit.Enabled = false;
+                // Now you can use the query to update the database
+                FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -207,64 +216,64 @@ namespace Form_Fontions
             textBox1.Focus();
         }
 
-
-        private void label4_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+
+            foreach (EditData entry in editDataList)
+            {
+                string columnNameID = entry.ColumnNameID;
+                string valueID = entry.ValueID;
+
+                string editedColumnName = entry.EditedColumnName;
+                string changedValue = entry.ChangedValues;
+
+                label8.Text = $"UPDATE {currentTable}";
+                label7.Text = $"ColumnNameID: {columnNameID}";
+                label4.Text = $"ValueID: {valueID}";
+                label5.Text = $"EditedColumnName: {editedColumnName}";
+                label6.Text = $"ChangedValues: {changedValue}";
+            }
+
+
+
 
         }
 
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellEndEdit_1(object sender, DataGridViewCellEventArgs e)
         {
             buttonUpdate.Enabled = true;
             buttonUpdate.Focus();
 
             if (e.RowIndex >= 0 && e.ColumnIndex != -1)
             {
-                int columnIndex = 0;
+                int columnIndex = 0; // Declare columnIndex here
+                EditData entry = new EditData(); // Create a new EditData object for each entry
 
-                if (e.ColumnIndex != columnIndex)
-                {
-                    object cellValue = dataGridView1.Rows[e.RowIndex].Cells[columnIndex].Value;
-
-                    if (cellValue != null)
-                    {
-                        valueID = cellValue.ToString();
-                    }
-                    else
-                    {
-
-                    }
-                }
-            }
-
-            if (e.RowIndex >= 0 && e.ColumnIndex != -1)
-            {
-                int columnIndex = 0;
+                var columnNameID = dataGridView1.Columns[0].Name;
+                entry.ColumnNameID = columnNameID;
 
                 if (e.ColumnIndex != columnIndex)
                 {
                     var columnName = dataGridView1.Columns[e.ColumnIndex].Name;
                     var row = dataGridView1.Rows[e.RowIndex];
-                    editedColumnName = columnName;
+                    entry.EditedColumnName = columnName;
 
                     if (e.ColumnIndex < row.Cells.Count)
                     {
                         var changedValue = (string)row.Cells[e.ColumnIndex].Value;
-                        changedValues = changedValue;
-                        if (changedValue != null)
-                        {
-                            string value = changedValue;
-                        }
-                        else
-                        {
-                        }
-                    }
-                    else
-                    {
+                        entry.ChangedValues = changedValue;
                     }
                 }
-            }
 
+                // Set entry.ValueID outside the inner if block
+                object cellValue = dataGridView1.Rows[e.RowIndex].Cells[columnIndex].Value;
+                if (cellValue != null)
+                {
+                    entry.ValueID = cellValue.ToString();
+                }
+
+                editDataList.Add(entry);
+            }
         }
     }
 }

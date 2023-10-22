@@ -34,13 +34,16 @@
             Epreuve = new Button();
             Tournoi = new Button();
             Joueur = new Button();
-            dataGridView1 = new DataGridView();
             panel1 = new Panel();
             buttonClear = new Button();
+            label4 = new Label();
             textBox1 = new TextBox();
             comboBox1 = new ComboBox();
             panel2 = new Panel();
-            label4 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            button1 = new Button();
             panel4 = new Panel();
             checkBox1 = new CheckBox();
             buttonUpdate = new Button();
@@ -48,18 +51,20 @@
             label3 = new Label();
             panel3 = new Panel();
             label1 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dataGridView1 = new DataGridView();
+            label8 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label2.Anchor = AnchorStyles.Left;
             label2.AutoSize = true;
-            label2.Location = new Point(13, 23);
+            label2.Location = new Point(6, 12);
             label2.Name = "label2";
             label2.Size = new Size(146, 15);
             label2.TabIndex = 14;
@@ -67,8 +72,8 @@
             // 
             // ScoresVainqueurs
             // 
-            ScoresVainqueurs.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            ScoresVainqueurs.Location = new Point(503, 19);
+            ScoresVainqueurs.Anchor = AnchorStyles.Left;
+            ScoresVainqueurs.Location = new Point(496, 8);
             ScoresVainqueurs.Name = "ScoresVainqueurs";
             ScoresVainqueurs.Size = new Size(115, 23);
             ScoresVainqueurs.TabIndex = 13;
@@ -78,8 +83,8 @@
             // 
             // MatchTennis
             // 
-            MatchTennis.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            MatchTennis.Location = new Point(408, 19);
+            MatchTennis.Anchor = AnchorStyles.Left;
+            MatchTennis.Location = new Point(401, 8);
             MatchTennis.Name = "MatchTennis";
             MatchTennis.Size = new Size(89, 23);
             MatchTennis.TabIndex = 12;
@@ -89,8 +94,8 @@
             // 
             // Epreuve
             // 
-            Epreuve.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            Epreuve.Location = new Point(327, 19);
+            Epreuve.Anchor = AnchorStyles.Left;
+            Epreuve.Location = new Point(320, 8);
             Epreuve.Name = "Epreuve";
             Epreuve.Size = new Size(75, 23);
             Epreuve.TabIndex = 11;
@@ -100,8 +105,8 @@
             // 
             // Tournoi
             // 
-            Tournoi.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            Tournoi.Location = new Point(246, 19);
+            Tournoi.Anchor = AnchorStyles.Left;
+            Tournoi.Location = new Point(239, 8);
             Tournoi.Name = "Tournoi";
             Tournoi.Size = new Size(75, 23);
             Tournoi.TabIndex = 10;
@@ -111,30 +116,14 @@
             // 
             // Joueur
             // 
-            Joueur.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            Joueur.Location = new Point(165, 19);
+            Joueur.Anchor = AnchorStyles.Left;
+            Joueur.Location = new Point(158, 8);
             Joueur.Name = "Joueur";
             Joueur.Size = new Size(75, 23);
             Joueur.TabIndex = 8;
             Joueur.Text = "Joueur";
             Joueur.UseVisualStyleBackColor = true;
             Joueur.Click += Joueur_Click;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.BackgroundColor = SystemColors.ControlLight;
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(200, 0);
-            dataGridView1.MultiSelect = false;
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(709, 395);
-            dataGridView1.TabIndex = 15;
-            dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
             // 
             // panel1
             // 
@@ -148,20 +137,31 @@
             panel1.Controls.Add(Tournoi);
             panel1.Controls.Add(Epreuve);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(200, 393);
+            panel1.Location = new Point(200, 416);
             panel1.Name = "panel1";
-            panel1.Size = new Size(709, 57);
+            panel1.Size = new Size(709, 34);
             panel1.TabIndex = 16;
             // 
             // buttonClear
             // 
-            buttonClear.Location = new Point(624, 19);
+            buttonClear.Anchor = AnchorStyles.Left;
+            buttonClear.Location = new Point(617, 8);
             buttonClear.Name = "buttonClear";
             buttonClear.Size = new Size(75, 23);
             buttonClear.TabIndex = 15;
             buttonClear.Text = "Clear";
             buttonClear.UseVisualStyleBackColor = true;
             buttonClear.Click += buttonClear_Click;
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Left;
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 336);
+            label4.Name = "label4";
+            label4.Size = new Size(38, 15);
+            label4.TabIndex = 21;
+            label4.Text = "label4";
             // 
             // textBox1
             // 
@@ -186,6 +186,11 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(label8);
+            panel2.Controls.Add(label7);
+            panel2.Controls.Add(label6);
+            panel2.Controls.Add(label5);
+            panel2.Controls.Add(button1);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
@@ -195,15 +200,42 @@
             panel2.Size = new Size(200, 450);
             panel2.TabIndex = 19;
             // 
-            // label4
+            // label7
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(18, 309);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 21;
-            label4.Text = "label4";
-            label4.Click += label4_Click;
+            label7.AutoSize = true;
+            label7.Location = new Point(13, 400);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 15);
+            label7.TabIndex = 24;
+            label7.Text = "label7";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(13, 376);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 15);
+            label6.TabIndex = 23;
+            label6.Text = "label6";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 356);
+            label5.Name = "label5";
+            label5.Size = new Size(38, 15);
+            label5.TabIndex = 22;
+            label5.Text = "label5";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(68, 305);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 20;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // panel4
             // 
@@ -281,6 +313,30 @@
             label1.TabIndex = 19;
             label1.Text = "Search by columns";
             // 
+            // dataGridView1
+            // 
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = SystemColors.ControlLight;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(200, 0);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(709, 393);
+            dataGridView1.TabIndex = 25;
+            dataGridView1.CellEndEdit += dataGridView1_CellEndEdit_1;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(12, 321);
+            label8.Name = "label8";
+            label8.Size = new Size(38, 15);
+            label8.TabIndex = 25;
+            label8.Text = "label8";
+            // 
             // ListTablesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -293,7 +349,6 @@
             MinimumSize = new Size(925, 489);
             Name = "ListTablesForm";
             Text = "ListTablesForm";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -302,6 +357,7 @@
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -314,7 +370,6 @@
         private Button Epreuve;
         private Button Tournoi;
         private Button Joueur;
-        private DataGridView dataGridView1;
         private Panel panel1;
         private Button buttonClear;
         private TextBox textBox1;
@@ -328,5 +383,11 @@
         private Button buttonUpdate;
         private Label label4;
         private CheckBox checkBox1;
+        private Button button1;
+        private DataGridView dataGridView1;
+        private Label label6;
+        private Label label5;
+        private Label label7;
+        private Label label8;
     }
 }
