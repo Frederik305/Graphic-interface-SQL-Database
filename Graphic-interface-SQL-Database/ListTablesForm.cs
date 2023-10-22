@@ -1,7 +1,5 @@
-﻿using Microsoft.VisualBasic;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using SqlFonctions;
-using System.Text;
 using static DatabaseTools;
 
 namespace Form_Fontions
@@ -13,9 +11,6 @@ namespace Form_Fontions
 
         private string query;
 
-        private string changedValues;
-        private string editedColumnName;
-        private string valueID;
         private string columnNameID;
 
         private string currentTable;
@@ -214,29 +209,6 @@ namespace Form_Fontions
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBox1.Focus();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            foreach (EditData entry in editDataList)
-            {
-                string columnNameID = entry.ColumnNameID;
-                string valueID = entry.ValueID;
-
-                string editedColumnName = entry.EditedColumnName;
-                string changedValue = entry.ChangedValues;
-
-                label8.Text = $"UPDATE {currentTable}";
-                label7.Text = $"ColumnNameID: {columnNameID}";
-                label4.Text = $"ValueID: {valueID}";
-                label5.Text = $"EditedColumnName: {editedColumnName}";
-                label6.Text = $"ChangedValues: {changedValue}";
-            }
-
-
-
-
         }
 
         private void dataGridView1_CellEndEdit_1(object sender, DataGridViewCellEventArgs e)

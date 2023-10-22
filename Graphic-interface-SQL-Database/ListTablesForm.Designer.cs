@@ -28,22 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label2 = new Label();
-            ScoresVainqueurs = new Button();
-            MatchTennis = new Button();
-            Epreuve = new Button();
-            Tournoi = new Button();
-            Joueur = new Button();
-            panel1 = new Panel();
-            buttonClear = new Button();
-            label4 = new Label();
             textBox1 = new TextBox();
             comboBox1 = new ComboBox();
             panel2 = new Panel();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
-            button1 = new Button();
             panel4 = new Panel();
             checkBox1 = new CheckBox();
             buttonUpdate = new Button();
@@ -52,116 +39,19 @@
             panel3 = new Panel();
             label1 = new Label();
             dataGridView1 = new DataGridView();
-            label8 = new Label();
-            panel1.SuspendLayout();
+            Epreuve = new Button();
+            Tournoi = new Button();
+            MatchTennis = new Button();
+            Joueur = new Button();
+            ScoresVainqueurs = new Button();
+            label2 = new Label();
+            buttonClear = new Button();
+            panel1 = new Panel();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Left;
-            label2.AutoSize = true;
-            label2.Location = new Point(6, 12);
-            label2.Name = "label2";
-            label2.Size = new Size(146, 15);
-            label2.TabIndex = 14;
-            label2.Text = "Choisire la table a afficher:";
-            // 
-            // ScoresVainqueurs
-            // 
-            ScoresVainqueurs.Anchor = AnchorStyles.Left;
-            ScoresVainqueurs.Location = new Point(496, 8);
-            ScoresVainqueurs.Name = "ScoresVainqueurs";
-            ScoresVainqueurs.Size = new Size(115, 23);
-            ScoresVainqueurs.TabIndex = 13;
-            ScoresVainqueurs.Text = "Scores Vainqueurs";
-            ScoresVainqueurs.UseVisualStyleBackColor = true;
-            ScoresVainqueurs.Click += ScoresVainqueurs_Click;
-            // 
-            // MatchTennis
-            // 
-            MatchTennis.Anchor = AnchorStyles.Left;
-            MatchTennis.Location = new Point(401, 8);
-            MatchTennis.Name = "MatchTennis";
-            MatchTennis.Size = new Size(89, 23);
-            MatchTennis.TabIndex = 12;
-            MatchTennis.Text = "Match tennis";
-            MatchTennis.UseVisualStyleBackColor = true;
-            MatchTennis.Click += MatchTennis_Click;
-            // 
-            // Epreuve
-            // 
-            Epreuve.Anchor = AnchorStyles.Left;
-            Epreuve.Location = new Point(320, 8);
-            Epreuve.Name = "Epreuve";
-            Epreuve.Size = new Size(75, 23);
-            Epreuve.TabIndex = 11;
-            Epreuve.Text = "Epreuve";
-            Epreuve.UseVisualStyleBackColor = true;
-            Epreuve.Click += Epreuve_Click;
-            // 
-            // Tournoi
-            // 
-            Tournoi.Anchor = AnchorStyles.Left;
-            Tournoi.Location = new Point(239, 8);
-            Tournoi.Name = "Tournoi";
-            Tournoi.Size = new Size(75, 23);
-            Tournoi.TabIndex = 10;
-            Tournoi.Text = "Tournoi";
-            Tournoi.UseVisualStyleBackColor = true;
-            Tournoi.Click += Tournoi_Click;
-            // 
-            // Joueur
-            // 
-            Joueur.Anchor = AnchorStyles.Left;
-            Joueur.Location = new Point(158, 8);
-            Joueur.Name = "Joueur";
-            Joueur.Size = new Size(75, 23);
-            Joueur.TabIndex = 8;
-            Joueur.Text = "Joueur";
-            Joueur.UseVisualStyleBackColor = true;
-            Joueur.Click += Joueur_Click;
-            // 
-            // panel1
-            // 
-            panel1.AutoSize = true;
-            panel1.BackColor = SystemColors.ControlLight;
-            panel1.Controls.Add(buttonClear);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(ScoresVainqueurs);
-            panel1.Controls.Add(Joueur);
-            panel1.Controls.Add(MatchTennis);
-            panel1.Controls.Add(Tournoi);
-            panel1.Controls.Add(Epreuve);
-            panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(200, 416);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(709, 34);
-            panel1.TabIndex = 16;
-            // 
-            // buttonClear
-            // 
-            buttonClear.Anchor = AnchorStyles.Left;
-            buttonClear.Location = new Point(617, 8);
-            buttonClear.Name = "buttonClear";
-            buttonClear.Size = new Size(75, 23);
-            buttonClear.TabIndex = 15;
-            buttonClear.Text = "Clear";
-            buttonClear.UseVisualStyleBackColor = true;
-            buttonClear.Click += buttonClear_Click;
-            // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Left;
-            label4.AutoSize = true;
-            label4.Location = new Point(12, 336);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 21;
-            label4.Text = "label4";
             // 
             // textBox1
             // 
@@ -186,12 +76,7 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(label8);
-            panel2.Controls.Add(label7);
-            panel2.Controls.Add(label6);
-            panel2.Controls.Add(label5);
-            panel2.Controls.Add(button1);
-            panel2.Controls.Add(label4);
+            panel2.BackColor = SystemColors.Control;
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
             panel2.Dock = DockStyle.Left;
@@ -199,43 +84,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(200, 450);
             panel2.TabIndex = 19;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(13, 400);
-            label7.Name = "label7";
-            label7.Size = new Size(38, 15);
-            label7.TabIndex = 24;
-            label7.Text = "label7";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(13, 376);
-            label6.Name = "label6";
-            label6.Size = new Size(38, 15);
-            label6.TabIndex = 23;
-            label6.Text = "label6";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(12, 356);
-            label5.Name = "label5";
-            label5.Size = new Size(38, 15);
-            label5.TabIndex = 22;
-            label5.Text = "label5";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(68, 305);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 20;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // panel4
             // 
@@ -328,31 +176,112 @@
             dataGridView1.TabIndex = 25;
             dataGridView1.CellEndEdit += dataGridView1_CellEndEdit_1;
             // 
-            // label8
+            // Epreuve
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(12, 321);
-            label8.Name = "label8";
-            label8.Size = new Size(38, 15);
-            label8.TabIndex = 25;
-            label8.Text = "label8";
+            Epreuve.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            Epreuve.Location = new Point(520, 411);
+            Epreuve.Name = "Epreuve";
+            Epreuve.Size = new Size(75, 23);
+            Epreuve.TabIndex = 11;
+            Epreuve.Text = "Epreuve";
+            Epreuve.UseVisualStyleBackColor = true;
+            Epreuve.Click += Epreuve_Click;
+            // 
+            // Tournoi
+            // 
+            Tournoi.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            Tournoi.Location = new Point(439, 411);
+            Tournoi.Name = "Tournoi";
+            Tournoi.Size = new Size(75, 23);
+            Tournoi.TabIndex = 10;
+            Tournoi.Text = "Tournoi";
+            Tournoi.UseVisualStyleBackColor = true;
+            Tournoi.Click += Tournoi_Click;
+            // 
+            // MatchTennis
+            // 
+            MatchTennis.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            MatchTennis.Location = new Point(601, 411);
+            MatchTennis.Name = "MatchTennis";
+            MatchTennis.Size = new Size(89, 23);
+            MatchTennis.TabIndex = 12;
+            MatchTennis.Text = "Match tennis";
+            MatchTennis.UseVisualStyleBackColor = true;
+            MatchTennis.Click += MatchTennis_Click;
+            // 
+            // Joueur
+            // 
+            Joueur.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            Joueur.Location = new Point(358, 411);
+            Joueur.Name = "Joueur";
+            Joueur.Size = new Size(75, 23);
+            Joueur.TabIndex = 8;
+            Joueur.Text = "Joueur";
+            Joueur.UseVisualStyleBackColor = true;
+            Joueur.Click += Joueur_Click;
+            // 
+            // ScoresVainqueurs
+            // 
+            ScoresVainqueurs.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            ScoresVainqueurs.Location = new Point(696, 411);
+            ScoresVainqueurs.Name = "ScoresVainqueurs";
+            ScoresVainqueurs.Size = new Size(115, 23);
+            ScoresVainqueurs.TabIndex = 13;
+            ScoresVainqueurs.Text = "Scores Vainqueurs";
+            ScoresVainqueurs.UseVisualStyleBackColor = true;
+            ScoresVainqueurs.Click += ScoresVainqueurs_Click;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label2.AutoSize = true;
+            label2.Location = new Point(206, 415);
+            label2.Name = "label2";
+            label2.Size = new Size(146, 15);
+            label2.TabIndex = 14;
+            label2.Text = "Choisire la table a afficher:";
+            // 
+            // buttonClear
+            // 
+            buttonClear.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonClear.Location = new Point(817, 411);
+            buttonClear.Name = "buttonClear";
+            buttonClear.Size = new Size(75, 23);
+            buttonClear.TabIndex = 15;
+            buttonClear.Text = "Clear";
+            buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += buttonClear_Click;
+            // 
+            // panel1
+            // 
+            panel1.AutoSize = true;
+            panel1.BackColor = SystemColors.ControlLight;
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(200, 450);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(709, 0);
+            panel1.TabIndex = 16;
             // 
             // ListTablesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
+            BackColor = SystemColors.ControlLight;
             ClientSize = new Size(909, 450);
+            Controls.Add(buttonClear);
             Controls.Add(dataGridView1);
+            Controls.Add(label2);
+            Controls.Add(ScoresVainqueurs);
             Controls.Add(panel1);
+            Controls.Add(Joueur);
             Controls.Add(panel2);
+            Controls.Add(MatchTennis);
+            Controls.Add(Epreuve);
+            Controls.Add(Tournoi);
             MinimumSize = new Size(925, 489);
             Name = "ListTablesForm";
             Text = "ListTablesForm";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
@@ -363,15 +292,6 @@
         }
 
         #endregion
-
-        private Label label2;
-        private Button ScoresVainqueurs;
-        private Button MatchTennis;
-        private Button Epreuve;
-        private Button Tournoi;
-        private Button Joueur;
-        private Panel panel1;
-        private Button buttonClear;
         private TextBox textBox1;
         private ComboBox comboBox1;
         private Panel panel2;
@@ -381,13 +301,15 @@
         private Label label3;
         private CheckBox checkBoxEdit;
         private Button buttonUpdate;
-        private Label label4;
         private CheckBox checkBox1;
-        private Button button1;
         private DataGridView dataGridView1;
-        private Label label6;
-        private Label label5;
-        private Label label7;
-        private Label label8;
+        private Button Epreuve;
+        private Button Tournoi;
+        private Button MatchTennis;
+        private Button Joueur;
+        private Button ScoresVainqueurs;
+        private Label label2;
+        private Button buttonClear;
+        private Panel panel1;
     }
 }
