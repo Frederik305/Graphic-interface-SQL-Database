@@ -17,4 +17,8 @@
     <ProjectReference Include="..\SqlFonctions\SqlFonctions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using SqlFonctions;
+using System.Windows.Forms;
 using static DatabaseTools;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Form_Fontions
 {
@@ -27,11 +29,68 @@ namespace Form_Fontions
             // Create a MySqlConnection using your ConnectionSqlDatabase class
             connection = ConnectionSqlDatabase.GetMySqlConnection(server, database, username, password);
 
+            string query = $"SHOW FULL TABLES WHERE TABLE_TYPE = 'VIEW'";
+            FillDataGrid.FillDataGridView(dataGridView2, server, database, username, password, query);
+            ComboBoxUtils.PopulateComboBoxWithColumnData(dataGridView2, 0, comboBox2);
+
             this.server = server;
             this.database = database;
             this.username = username;
             this.password = password;
         }
+
+
+        private void buttonAfficher_Click(object sender, EventArgs e)
+        {
+            currentView = comboBox2.SelectedItem as string;
+            if (!string.IsNullOrEmpty(currentView))
+            {
+                // Requête SQL pour récupérer toutes les données de la table "joueur"
+                query = $"SELECT * FROM {currentView}";
+
+                // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
+                FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+
+                //popule combobox avec les columns de la table
+                ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
+
+                if (currentView == "vainqueur_f_du_tournoi_de_wimbledon")
+                {
+                    dataGridView1.Columns[0].HeaderText = "Nom";
+                    dataGridView1.Columns[1].HeaderText = "Prenom";
+                    dataGridView1.Columns[2].HeaderText = "Set 1";
+                    dataGridView1.Columns[3].HeaderText = "Set 2";
+                    dataGridView1.Columns[4].HeaderText = "Set 3";
+                    dataGridView1.Columns[5].HeaderText = "Set 4";
+                    dataGridView1.Columns[6].HeaderText = "Set 5";
+                    dataGridView1.Columns[7].HeaderText = "Annee du tournoi";
+                }
+                else if (currentView == "hommes_participe_tournoi_roland_garros")
+                {
+                    dataGridView1.Columns[0].HeaderText = "Hommes qui ont participe au tournoi de Roland Garros";
+                }
+                else if (currentView == "nombre_participant_par_tournoi_annee_sexe")
+                {
+                    dataGridView1.Columns[0].HeaderText = "Nom du Tournoi";
+                    dataGridView1.Columns[1].HeaderText = "Annee du Tournoi";
+                    dataGridView1.Columns[2].HeaderText = "Sexe";
+                    dataGridView1.Columns[3].HeaderText = "Nombre de participants";
+                }
+                else if (currentView == "joueur_scoretoustournoi_anneetournoi")
+                {
+                    dataGridView1.Columns[0].HeaderText = "Nom";
+                    dataGridView1.Columns[1].HeaderText = "Prenom";
+                    dataGridView1.Columns[2].HeaderText = "Nom tournoi";
+                    dataGridView1.Columns[3].HeaderText = "Annee";
+                    dataGridView1.Columns[4].HeaderText = "Set 1";
+                    dataGridView1.Columns[5].HeaderText = "Set 2";
+                    dataGridView1.Columns[6].HeaderText = "Set 3";
+                    dataGridView1.Columns[7].HeaderText = "Set 4";
+                    dataGridView1.Columns[8].HeaderText = "Set 5";
+                }
+            }
+        }
+
 
         // Méthode exécutée lorsque le bouton "VainFTourWimbelton" est cliqué
         private void VainFTourWimbelton_Click(object sender, EventArgs e)

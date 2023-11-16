@@ -16,6 +16,18 @@ public class DatabaseTools
                 comboBox.Items.Add(column.HeaderText);
             }
         }
+        public static void PopulateComboBoxWithColumnData(DataGridView dataGridView, int columnIndex, ComboBox comboBox)
+        {
+            comboBox.Items.Clear();
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (row.Cells[columnIndex].Value != null)
+                {
+                    comboBox.Items.Add(row.Cells[columnIndex].Value.ToString());
+                }
+            }
+        }
     }
 
     // Classe FillDataGrid pour remplir une DataGridView avec les résultats d'une requête
@@ -82,14 +94,18 @@ public class DatabaseTools
                 dataTable.Rows.Clear();
                 dataGridView.Columns.Clear();
             }
-            else { }
+            else 
+            {
+                dataGridView.Rows.Clear();
+                dataGridView.Columns.Clear();
+            }
         }
     }
     public class EditData
     {
-        public string EditedColumnName { get; set; }
-        public string ChangedValues { get; set; }
-        public string ColumnNameID { get; set; }
-        public string ValueID { get; set; }
+        public string? EditedColumnName { get; set; }
+        public string? ChangedValues { get; set; }
+        public string? ColumnNameID { get; set; }
+        public string? ValueID { get; set; }
     }
 }

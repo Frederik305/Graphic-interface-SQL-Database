@@ -42,7 +42,7 @@
             afficheTables.Name = "afficheTables";
             afficheTables.Size = new Size(126, 23);
             afficheTables.TabIndex = 0;
-            afficheTables.Text = "Afficher les tables";
+            afficheTables.Text = "Gestion des tables";
             afficheTables.UseVisualStyleBackColor = true;
             afficheTables.Click += afficheTables_Click;
             // 

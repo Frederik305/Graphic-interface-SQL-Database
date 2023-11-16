@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using SqlFonctions;
+using System.Data;
 using static DatabaseTools;
 
 namespace Form_Fontions
@@ -7,7 +8,8 @@ namespace Form_Fontions
     public partial class ListTablesForm : Form
     {
         private List<EditData> editDataList = new List<EditData>();
-        private EditData entry = new EditData();
+
+        private DataTable dataTable;
 
         private string query;
 
@@ -15,13 +17,14 @@ namespace Form_Fontions
 
         private string currentTable;
 
+        private bool IsDataInDataGrid = false;
+
         private string server;
         private string database;
         private string username;
         private string password;
 
         private MySqlConnection connection;
-        private DatabaseTools dbTools;
 
         // Constructeur de la classe ListTablesForm qui prend en paramètres les informations de connexion
         public ListTablesForm(string server, string database, string username, string password)
@@ -31,113 +34,22 @@ namespace Form_Fontions
             // Create a MySqlConnection using your ConnectionSqlDatabase class
             connection = ConnectionSqlDatabase.GetMySqlConnection(server, database, username, password);
 
+            string query = $"SHOW FULL TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
+            FillDataGrid.FillDataGridView(dataGridView2, server, database, username, password, query);
+            ComboBoxUtils.PopulateComboBoxWithColumnData(dataGridView2, 0, comboBox2);
+
             this.server = server;
             this.database = database;
             this.username = username;
             this.password = password;
         }
 
-        // Méthode exécutée lorsque le bouton "Joueur" est cliqué
-        private void Joueur_Click(object sender, EventArgs e)
+        private void buttonAfficher_Click(object sender, EventArgs e)
         {
-            currentTable = "joueur";
+            ClearDataGrid.ClearDataGridView(dataGridView1);
+            currentTable = comboBox2.SelectedItem as string;
 
-            // Requête SQL pour récupérer toutes les données de la table "joueur"
-            query = $"SELECT `JOU_id`,`JOU_nom`,`JOU_prenom`,`JOU_sexe` FROM {currentTable}";
-
-            // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
-
-            //popule combobox avec les columns de la table
-            ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
-
-            var ID = dataGridView1.Columns[0].Name;
-            columnNameID = ID.ToString();
-
-            checkBoxEdit.Enabled = true;
-            checkBox1.Enabled = false;
-        }
-
-        // Méthode exécutée lorsque le bouton "Tournoi" est cliqué
-        private void Tournoi_Click(object sender, EventArgs e)
-        {
-            currentTable = "tournoi";
-            // Requête SQL pour récupérer toutes les données de la table "tournoi"
-            query = $"SELECT `TOU_id`,`TOU_nom`,`TOU_code` FROM {currentTable}";
-
-            // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
-
-            ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
-
-            //popule combobox avec les columns de la table
-            ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
-
-            var ID = dataGridView1.Columns[0].Name;
-            columnNameID = ID.ToString();
-
-            checkBoxEdit.Enabled = true;
-            checkBox1.Enabled = false;
-        }
-
-        // Méthode exécutée lorsque le bouton "Epreuve" est cliqué
-        private void Epreuve_Click(object sender, EventArgs e)
-        {
-            currentTable = "epreuve";
-            // Requête SQL pour récupérer toutes les données de la table "epreuve"
-            query = $"SELECT `EPR_id`,`EPR_annee`,`EPR_type`,`FKEPR_tourId` FROM {currentTable}";
-
-            // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
-
-            //popule combobox avec les columns de la table
-            ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
-
-            var ID = dataGridView1.Columns[0].Name;
-            columnNameID = ID.ToString();
-
-            checkBoxEdit.Enabled = true;
-            checkBox1.Enabled = false;
-        }
-
-        // Méthode exécutée lorsque le bouton "MatchTennis" est cliqué
-        private void MatchTennis_Click(object sender, EventArgs e)
-        {
-            currentTable = "match_tennis";
-            // Requête SQL pour récupérer toutes les données de la table "match_tennis"
-            query = $"SELECT `MAT_id`,`FKEPR_eprId`,`FKJOU_vainId`,`FKJOU_finaId` FROM {currentTable}";
-
-            // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
-
-            //popule combobox avec les columns de la table
-            ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
-
-            var ID = dataGridView1.Columns[0].Name;
-            columnNameID = ID.ToString();
-
-            checkBoxEdit.Enabled = true;
-            checkBox1.Enabled = false;
-        }
-
-        // Méthode exécutée lorsque le bouton "ScoresVainqueurs" est cliqué
-        private void ScoresVainqueurs_Click(object sender, EventArgs e)
-        {
-            currentTable = "score_vainqueur";
-            // Requête SQL pour récupérer toutes les données de la table "score_vainqueur"
-            query = $"SELECT `SCR_id`,`FKSCR_matId`,`SCR_SET1`,`SCR_SET2`,`SCR_SET3`,`SCR_SET4`,`SCR_SET5` FROM {currentTable}";
-
-            // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
-
-            //popule combobox avec les columns de la table
-            ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
-
-            var ID = dataGridView1.Columns[0].Name;
-            columnNameID = ID.ToString();
-
-            checkBoxEdit.Enabled = true;
-            checkBox1.Enabled = false;
+            AddData();
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -151,6 +63,8 @@ namespace Form_Fontions
 
             checkBox1.Enabled = false;
             checkBoxEdit.Enabled = false;
+
+            IsDataInDataGrid = false;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -246,6 +160,70 @@ namespace Form_Fontions
 
                 editDataList.Add(entry);
             }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            AddData();
+        }
+
+        private void buttonSaveNewData_Click(object sender, EventArgs e)
+        {
+            ClearDataGrid.ClearDataGridView(dataGridView1);
+            IsDataInDataGrid = false;
+        }
+
+        private void AddData()
+        {
+            if (!string.IsNullOrEmpty(currentTable))
+            {
+                if (checkBoxAddData.Checked && IsDataInDataGrid == true)
+                {
+                    List<DataGridViewColumn> savedColumns = new List<DataGridViewColumn>();
+                    foreach (DataGridViewColumn column in dataGridView1.Columns)
+                    {
+                        savedColumns.Add(column);
+                    }
+                    dataGridView1.DataSource = null;
+
+                    ClearDataGrid.ClearDataGridView(dataGridView1);
+
+                    foreach (DataGridViewColumn column in savedColumns)
+                    {
+                        dataGridView1.Columns.Add(column.Clone() as DataGridViewColumn);
+                    }
+                    object[] rowValues = { "Value1", "Value2", "Value3" };
+                    dataGridView1.Rows.Add(rowValues);
+
+                    dataGridView1.ReadOnly = false;
+
+                    buttonSaveNewData.Enabled = true;
+
+                    IsDataInDataGrid = false;
+                }
+                else
+                {
+                    dataGridView1.DataSource = dataTable;
+                    // Requête SQL pour récupérer toutes les données de la table "joueur"
+                    query = $"SELECT * FROM {currentTable}";
+
+                    // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
+                    FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+
+                    //popule combobox avec les columns de la table
+                    ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
+
+                    var ID = dataGridView1.Columns[0].Name;
+                    columnNameID = ID.ToString();
+
+                    checkBoxEdit.Enabled = true;
+                    checkBox1.Enabled = false;
+                    checkBoxAddData.Checked = false;
+
+                    IsDataInDataGrid = true;
+                }
+            }
+            else { IsDataInDataGrid = false; }
         }
     }
 }

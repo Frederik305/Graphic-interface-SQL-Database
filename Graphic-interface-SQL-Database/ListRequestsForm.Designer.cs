@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             label2 = new Label();
-            VainFTourWimbelton = new Button();
-            Hommes_participe_tournoi_Roland_Garros = new Button();
-            Nombre_Participant_par_Tournoi_Annee_Sexe = new Button();
-            Joueur_ScoreTousTournoi_AnneeTournoi = new Button();
             panel1 = new Panel();
+            buttonAfficher = new Button();
+            comboBox2 = new ComboBox();
             buttonClear = new Button();
             label1 = new Label();
             ScoresVainqueurs = new Button();
@@ -43,6 +41,7 @@
             Epreuve = new Button();
             dataGridView1 = new DataGridView();
             panel2 = new Panel();
+            dataGridView2 = new DataGridView();
             panel3 = new Panel();
             label3 = new Label();
             comboBox1 = new ComboBox();
@@ -50,6 +49,7 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,64 +63,17 @@
             label2.TabIndex = 15;
             label2.Text = "Choisire la requete a afficher:";
             // 
-            // VainFTourWimbelton
-            // 
-            VainFTourWimbelton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            VainFTourWimbelton.Location = new Point(182, 19);
-            VainFTourWimbelton.Name = "VainFTourWimbelton";
-            VainFTourWimbelton.Size = new Size(75, 23);
-            VainFTourWimbelton.TabIndex = 16;
-            VainFTourWimbelton.Text = "Requete 1";
-            VainFTourWimbelton.UseVisualStyleBackColor = true;
-            VainFTourWimbelton.Click += VainFTourWimbelton_Click;
-            // 
-            // Hommes_participe_tournoi_Roland_Garros
-            // 
-            Hommes_participe_tournoi_Roland_Garros.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            Hommes_participe_tournoi_Roland_Garros.Location = new Point(263, 19);
-            Hommes_participe_tournoi_Roland_Garros.Name = "Hommes_participe_tournoi_Roland_Garros";
-            Hommes_participe_tournoi_Roland_Garros.Size = new Size(75, 23);
-            Hommes_participe_tournoi_Roland_Garros.TabIndex = 17;
-            Hommes_participe_tournoi_Roland_Garros.Text = "Requete 2";
-            Hommes_participe_tournoi_Roland_Garros.UseVisualStyleBackColor = true;
-            Hommes_participe_tournoi_Roland_Garros.Click += Hommes_participe_tournoi_Roland_Garros_Click;
-            // 
-            // Nombre_Participant_par_Tournoi_Annee_Sexe
-            // 
-            Nombre_Participant_par_Tournoi_Annee_Sexe.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            Nombre_Participant_par_Tournoi_Annee_Sexe.Location = new Point(344, 19);
-            Nombre_Participant_par_Tournoi_Annee_Sexe.Name = "Nombre_Participant_par_Tournoi_Annee_Sexe";
-            Nombre_Participant_par_Tournoi_Annee_Sexe.Size = new Size(75, 23);
-            Nombre_Participant_par_Tournoi_Annee_Sexe.TabIndex = 18;
-            Nombre_Participant_par_Tournoi_Annee_Sexe.Text = "Requete 3";
-            Nombre_Participant_par_Tournoi_Annee_Sexe.UseVisualStyleBackColor = true;
-            Nombre_Participant_par_Tournoi_Annee_Sexe.Click += Nombre_Participant_par_Tournoi_Annee_Sexe_Click;
-            // 
-            // Joueur_ScoreTousTournoi_AnneeTournoi
-            // 
-            Joueur_ScoreTousTournoi_AnneeTournoi.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            Joueur_ScoreTousTournoi_AnneeTournoi.Location = new Point(425, 19);
-            Joueur_ScoreTousTournoi_AnneeTournoi.Name = "Joueur_ScoreTousTournoi_AnneeTournoi";
-            Joueur_ScoreTousTournoi_AnneeTournoi.Size = new Size(75, 23);
-            Joueur_ScoreTousTournoi_AnneeTournoi.TabIndex = 19;
-            Joueur_ScoreTousTournoi_AnneeTournoi.Text = "Requete 4";
-            Joueur_ScoreTousTournoi_AnneeTournoi.UseCompatibleTextRendering = true;
-            Joueur_ScoreTousTournoi_AnneeTournoi.UseVisualStyleBackColor = true;
-            Joueur_ScoreTousTournoi_AnneeTournoi.Click += Joueur_ScoreTousTournoi_AnneeTournoi_Click;
-            // 
             // panel1
             // 
             panel1.AutoSize = true;
             panel1.BackColor = SystemColors.ControlLight;
+            panel1.Controls.Add(buttonAfficher);
+            panel1.Controls.Add(comboBox2);
             panel1.Controls.Add(buttonClear);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(Joueur_ScoreTousTournoi_AnneeTournoi);
             panel1.Controls.Add(ScoresVainqueurs);
-            panel1.Controls.Add(Nombre_Participant_par_Tournoi_Annee_Sexe);
             panel1.Controls.Add(Joueur);
-            panel1.Controls.Add(Hommes_participe_tournoi_Roland_Garros);
             panel1.Controls.Add(MatchTennis);
-            panel1.Controls.Add(VainFTourWimbelton);
             panel1.Controls.Add(Tournoi);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(Epreuve);
@@ -130,9 +83,27 @@
             panel1.Size = new Size(709, 57);
             panel1.TabIndex = 21;
             // 
+            // buttonAfficher
+            // 
+            buttonAfficher.Location = new Point(458, 19);
+            buttonAfficher.Name = "buttonAfficher";
+            buttonAfficher.Size = new Size(75, 23);
+            buttonAfficher.TabIndex = 24;
+            buttonAfficher.Text = "Afficher";
+            buttonAfficher.UseVisualStyleBackColor = true;
+            buttonAfficher.Click += buttonAfficher_Click;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(182, 19);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(270, 23);
+            comboBox2.TabIndex = 23;
+            // 
             // buttonClear
             // 
-            buttonClear.Location = new Point(506, 19);
+            buttonClear.Location = new Point(622, 19);
             buttonClear.Name = "buttonClear";
             buttonClear.Size = new Size(75, 23);
             buttonClear.TabIndex = 22;
@@ -216,12 +187,22 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(dataGridView2);
             panel2.Controls.Add(panel3);
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(200, 450);
             panel2.TabIndex = 25;
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(0, 432);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowTemplate.Height = 25;
+            dataGridView2.Size = new Size(16, 18);
+            dataGridView2.TabIndex = 20;
             // 
             // panel3
             // 
@@ -278,6 +259,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ResumeLayout(false);
@@ -286,10 +268,6 @@
 
         #endregion
         private Label label2;
-        private Button VainFTourWimbelton;
-        private Button Hommes_participe_tournoi_Roland_Garros;
-        private Button Nombre_Participant_par_Tournoi_Annee_Sexe;
-        private Button Joueur_ScoreTousTournoi_AnneeTournoi;
         private Panel panel1;
         private Label label1;
         private Button ScoresVainqueurs;
@@ -304,5 +282,8 @@
         private Label label3;
         private ComboBox comboBox1;
         private TextBox textBox1;
+        private Button buttonAfficher;
+        private ComboBox comboBox2;
+        private DataGridView dataGridView2;
     }
 }
