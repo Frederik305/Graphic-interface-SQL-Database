@@ -31,7 +31,6 @@ namespace Form_Fontions
         {
             InitializeComponent();
 
-            // Create a MySqlConnection using your ConnectionSqlDatabase class
             connection = ConnectionSqlDatabase.GetMySqlConnection(server, database, username, password);
 
             string query = $"SHOW FULL TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
@@ -47,7 +46,7 @@ namespace Form_Fontions
         private void buttonAfficher_Click(object sender, EventArgs e)
         {
             ClearDataGrid.ClearDataGridView(dataGridView1);
-            currentTable = comboBox2.SelectedItem as string;
+            currentTable = (string)comboBox2.SelectedItem;
 
             AddData();
         }
@@ -65,19 +64,28 @@ namespace Form_Fontions
             checkBoxEdit.Enabled = false;
 
             IsDataInDataGrid = false;
+
+            comboBox1.Items.Clear();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string selectedColumnName = comboBox1.SelectedItem as string;
-            string inputValue = textBox1.Text;
-
-            if (string.IsNullOrEmpty(inputValue) || (string.IsNullOrEmpty(selectedColumnName))) { FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query); }
+            if (textBox1.Text == string.Empty)
+            {
+                FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+            }
             else
             {
-                string whereClause = $"WHERE {selectedColumnName} LIKE '%{inputValue}%';";
+                string selectedColumnName = comboBox1.SelectedItem as string;
+                string inputValue = textBox1.Text;
 
-                FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, $"SELECT * FROM {currentTable}", whereClause);
+                if (string.IsNullOrEmpty(inputValue) || (string.IsNullOrEmpty(selectedColumnName))) { FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query); }
+                else
+                {
+                    string whereClause = $"WHERE {selectedColumnName} LIKE '%{inputValue}%';";
+
+                    FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, $"SELECT * FROM {currentTable}", whereClause);
+                }
             }
         }
 
@@ -88,6 +96,7 @@ namespace Form_Fontions
                 checkBox1.Enabled = true;
                 dataGridView1.ReadOnly = false;
                 dataGridView1.Columns[columnNameID].ReadOnly = true;
+                if (currentTable == "epreuve") { dataGridView1.Columns[columnNameID].ReadOnly = true; }
             }
             else
                 dataGridView1.ReadOnly = true;
@@ -97,7 +106,7 @@ namespace Form_Fontions
         {
             if (checkBoxEdit.Checked)
             {
-                if (checkBox1.Checked) { dataGridView1.Columns[columnNameID].ReadOnly = false; }
+                dataGridView1.Columns[columnNameID].ReadOnly = false;
             }
             else
                 dataGridView1.ReadOnly = true;
@@ -115,7 +124,6 @@ namespace Form_Fontions
 
                 query = $"UPDATE {currentTable} SET {editedColumnName} = '{changedValue}' WHERE {columnNameID} = {valueID}";
 
-                // Now you can use the query to update the database
                 FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
             }
         }
@@ -132,8 +140,8 @@ namespace Form_Fontions
 
             if (e.RowIndex >= 0 && e.ColumnIndex != -1)
             {
-                int columnIndex = 0; // Declare columnIndex here
-                EditData entry = new EditData(); // Create a new EditData object for each entry
+                int columnIndex = 0;
+                EditData entry = new EditData();
 
                 var columnNameID = dataGridView1.Columns[0].Name;
                 entry.ColumnNameID = columnNameID;
@@ -151,7 +159,6 @@ namespace Form_Fontions
                     }
                 }
 
-                // Set entry.ValueID outside the inner if block
                 object cellValue = dataGridView1.Rows[e.RowIndex].Cells[columnIndex].Value;
                 if (cellValue != null)
                 {
@@ -165,12 +172,58 @@ namespace Form_Fontions
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             AddData();
+            dataGridView1.AllowUserToAddRows = false;
+            if (checkBoxAddData.Checked)
+            {
+                dataGridView1.AllowUserToAddRows = true;
+            }
         }
 
         private void buttonSaveNewData_Click(object sender, EventArgs e)
         {
-            ClearDataGrid.ClearDataGridView(dataGridView1);
-            IsDataInDataGrid = false;
+            int columnCount = dataGridView1.Columns.Count;
+            string queries = "";
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string rowValuesString = "";
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                        {
+                            rowValuesString += $"'{cell.Value}'";
+                        }
+                        else
+                        {
+                            rowValuesString += "NULL";
+                        }
+
+                        if (cell.ColumnIndex < columnCount - 1)
+                        {
+                            rowValuesString += ", ";
+                        }
+                    }
+
+                    string headerValuesString = "";
+                    for (int i = 0; i < columnCount; i++)
+                    {
+                        headerValuesString += dataGridView1.Columns[i].HeaderText;
+
+                        if (i < columnCount - 1)
+                        {
+                            headerValuesString += ", ";
+                        }
+                    }
+
+                    string query = $"INSERT INTO {currentTable} ({headerValuesString}) VALUES ({rowValuesString});";
+                    queries += query;
+                }
+            }
+            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, queries);
+            AddData();
         }
 
         private void AddData()
@@ -192,8 +245,6 @@ namespace Form_Fontions
                     {
                         dataGridView1.Columns.Add(column.Clone() as DataGridViewColumn);
                     }
-                    object[] rowValues = { "Value1", "Value2", "Value3" };
-                    dataGridView1.Rows.Add(rowValues);
 
                     dataGridView1.ReadOnly = false;
 
@@ -224,6 +275,17 @@ namespace Form_Fontions
                 }
             }
             else { IsDataInDataGrid = false; }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string firstColumnName = dataGridView1.Columns[0].HeaderText;
+
+            string rowToDelete = textBox2.Text;
+
+            query = $"DELETE FROM {currentTable} WHERE {firstColumnName} = {rowToDelete}";
+            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+            AddData();
         }
     }
 }

@@ -32,6 +32,10 @@
             textBox1 = new TextBox();
             comboBox1 = new ComboBox();
             panel2 = new Panel();
+            panel6 = new Panel();
+            textBox2 = new TextBox();
+            label5 = new Label();
+            button1 = new Button();
             panel5 = new Panel();
             label4 = new Label();
             buttonSaveNewData = new Button();
@@ -52,7 +56,10 @@
             buttonAfficher = new Button();
             connectionSqlDatabaseBindingSource = new BindingSource(components);
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            label6 = new Label();
+            label7 = new Label();
             panel2.SuspendLayout();
+            panel6.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -87,6 +94,7 @@
             panel2.AutoScroll = true;
             panel2.AutoSize = true;
             panel2.BackColor = SystemColors.ControlLight;
+            panel2.Controls.Add(panel6);
             panel2.Controls.Add(panel5);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
@@ -97,6 +105,44 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(200, 520);
             panel2.TabIndex = 19;
+            // 
+            // panel6
+            // 
+            panel6.BackColor = SystemColors.ControlLightLight;
+            panel6.Controls.Add(textBox2);
+            panel6.Controls.Add(label5);
+            panel6.Controls.Add(button1);
+            panel6.Location = new Point(0, 385);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(183, 119);
+            panel6.TabIndex = 22;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(12, 47);
+            textBox2.Name = "textBox2";
+            textBox2.PlaceholderText = "entrer l'ID de la row a delete";
+            textBox2.Size = new Size(154, 23);
+            textBox2.TabIndex = 24;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(21, 16);
+            label5.Name = "label5";
+            label5.Size = new Size(126, 15);
+            label5.TabIndex = 23;
+            label5.Text = "Delete content in table";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(23, 76);
+            button1.Name = "button1";
+            button1.Size = new Size(113, 31);
+            button1.TabIndex = 22;
+            button1.Text = "Delete";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // panel5
             // 
@@ -228,6 +274,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = SystemColors.ControlLight;
@@ -297,12 +344,32 @@
             // 
             connectionSqlDatabaseBindingSource.DataSource = typeof(SqlFonctions.ConnectionSqlDatabase);
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(211, 504);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 15);
+            label6.TabIndex = 28;
+            label6.Text = "label6";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(518, 504);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 15);
+            label7.TabIndex = 29;
+            label7.Text = "label7";
+            // 
             // ListTablesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(926, 520);
+            Controls.Add(label7);
+            Controls.Add(label6);
             Controls.Add(dataGridView2);
             Controls.Add(buttonAfficher);
             Controls.Add(comboBox2);
@@ -315,6 +382,8 @@
             Name = "ListTablesForm";
             Text = "ListTablesForm";
             panel2.ResumeLayout(false);
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             panel4.ResumeLayout(false);
@@ -353,5 +422,11 @@
         private Label label4;
         private Button buttonSaveNewData;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Panel panel6;
+        private TextBox textBox2;
+        private Label label5;
+        private Button button1;
+        private Label label6;
+        private Label label7;
     }
 }
