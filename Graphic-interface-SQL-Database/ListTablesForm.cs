@@ -41,6 +41,8 @@ namespace Form_Fontions
             this.database = database;
             this.username = username;
             this.password = password;
+
+            checkBoxAddData.Enabled = false;
         }
 
         private void buttonAfficher_Click(object sender, EventArgs e)
@@ -96,7 +98,8 @@ namespace Form_Fontions
                 checkBox1.Enabled = true;
                 dataGridView1.ReadOnly = false;
                 dataGridView1.Columns[columnNameID].ReadOnly = true;
-                if (currentTable == "epreuve") { dataGridView1.Columns[columnNameID].ReadOnly = true; }
+                if (currentTable == "epreuve") { dataGridView1.Columns[columnNameID].ReadOnly = true; dataGridView1.Columns[3].ReadOnly = true; }
+                if (currentTable == "score_vainqueur") { dataGridView1.Columns[columnNameID].ReadOnly = true; dataGridView1.Columns[1].ReadOnly = true; }
             }
             else
                 dataGridView1.ReadOnly = true;
@@ -125,6 +128,7 @@ namespace Form_Fontions
                 query = $"UPDATE {currentTable} SET {editedColumnName} = '{changedValue}' WHERE {columnNameID} = {valueID}";
 
                 FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+                AddData();
             }
         }
 
@@ -154,8 +158,12 @@ namespace Form_Fontions
 
                     if (e.ColumnIndex < row.Cells.Count)
                     {
-                        var changedValue = (string)row.Cells[e.ColumnIndex].Value;
-                        entry.ChangedValues = changedValue;
+                        var cellValue1 = row.Cells[e.ColumnIndex].Value;
+                        if (cellValue1 != null)
+                        {
+                            var changedValue = cellValue1.ToString();
+                            entry.ChangedValues = changedValue;
+                        }
                     }
                 }
 
@@ -270,7 +278,12 @@ namespace Form_Fontions
                     checkBoxEdit.Enabled = true;
                     checkBox1.Enabled = false;
                     checkBoxAddData.Checked = false;
-
+                    checkBoxEdit.Checked = false;
+                    checkBoxAddData.Enabled = true;
+                    if (currentTable == "match_tennis")
+                    {
+                        checkBoxEdit.Enabled = false;
+                    }
                     IsDataInDataGrid = true;
                 }
             }

@@ -56,8 +56,6 @@
             buttonAfficher = new Button();
             connectionSqlDatabaseBindingSource = new BindingSource(components);
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            label6 = new Label();
-            label7 = new Label();
             panel2.SuspendLayout();
             panel6.SuspendLayout();
             panel5.SuspendLayout();
@@ -344,32 +342,12 @@
             // 
             connectionSqlDatabaseBindingSource.DataSource = typeof(SqlFonctions.ConnectionSqlDatabase);
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(211, 504);
-            label6.Name = "label6";
-            label6.Size = new Size(38, 15);
-            label6.TabIndex = 28;
-            label6.Text = "label6";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(518, 504);
-            label7.Name = "label7";
-            label7.Size = new Size(38, 15);
-            label7.TabIndex = 29;
-            label7.Text = "label7";
-            // 
             // ListTablesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(926, 520);
-            Controls.Add(label7);
-            Controls.Add(label6);
             Controls.Add(dataGridView2);
             Controls.Add(buttonAfficher);
             Controls.Add(comboBox2);
@@ -426,7 +404,5 @@
         private TextBox textBox2;
         private Label label5;
         private Button button1;
-        private Label label6;
-        private Label label7;
     }
 }

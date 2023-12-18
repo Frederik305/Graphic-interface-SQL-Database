@@ -1,7 +1,3 @@
-using System.Windows.Forms;
-using static DatabaseTools;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
 namespace Form_Fontions
 {
     public partial class Main : Form

@@ -36,7 +36,6 @@ public class DatabaseTools
         // Méthode pour remplir une DataGridView avec les résultats d'une requête SQL
         public static void FillDataGridView(DataGridView dataGridView, string server, string database, string username, string password, string query, string whereClause = null)
         {
-
             if (!string.IsNullOrEmpty(whereClause))
             {
                 query += " " + whereClause;
@@ -73,7 +72,7 @@ public class DatabaseTools
             catch (MySqlException ex)
             {
                 // En cas d'erreur MySQL, afficher un message d'erreur
-                MessageBox.Show($"Error: {ex.Message}");
+                // MessageBox.Show($"Error: {ex.Message}");
             }
             finally
             {
