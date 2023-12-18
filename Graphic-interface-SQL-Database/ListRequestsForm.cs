@@ -1,8 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using SqlFonctions;
-using System.Windows.Forms;
 using static DatabaseTools;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Form_Fontions
 {
@@ -14,6 +12,7 @@ namespace Form_Fontions
         private string currentView;
 
         private string server;
+        private string port;
         private string database;
         private string username;
         private string password;
@@ -22,18 +21,19 @@ namespace Form_Fontions
         private DatabaseTools dbTools;
 
         // Constructeur de la classe ListRequestsForm qui prend en paramètres les informations de connexion
-        public ListRequestsForm(string server, string database, string username, string password)
+        public ListRequestsForm(string server, string port, string database, string username, string password)
         {
             InitializeComponent();
 
             // Create a MySqlConnection using your ConnectionSqlDatabase class
-            connection = ConnectionSqlDatabase.GetMySqlConnection(server, database, username, password);
+            connection = ConnectionSqlDatabase.GetMySqlConnection(server, port, database, username, password);
 
             string query = $"SHOW FULL TABLES WHERE TABLE_TYPE = 'VIEW'";
-            FillDataGrid.FillDataGridView(dataGridView2, server, database, username, password, query);
+            FillDataGrid.FillDataGridView(dataGridView2, server, port, database, username, password, query);
             ComboBoxUtils.PopulateComboBoxWithColumnData(dataGridView2, 0, comboBox2);
 
             this.server = server;
+            this.port = port;
             this.database = database;
             this.username = username;
             this.password = password;
@@ -49,7 +49,7 @@ namespace Form_Fontions
                 query = $"SELECT * FROM {currentView}";
 
                 // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-                FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+                FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
 
                 //popule combobox avec les columns de la table
                 ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
@@ -100,7 +100,7 @@ namespace Form_Fontions
             string query = $"SELECT * FROM {currentView}";
 
             // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+            FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
 
             ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
 
@@ -122,7 +122,7 @@ namespace Form_Fontions
             query = $"SELECT * FROM {currentView}";
 
             // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+            FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
 
             ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
 
@@ -137,7 +137,7 @@ namespace Form_Fontions
             query = $"SELECT * FROM {currentView}";
 
             // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+            FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
 
             ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
 
@@ -155,7 +155,7 @@ namespace Form_Fontions
             query = $"SELECT * FROM {currentView}";
 
             // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+            FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
 
             ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
 
@@ -184,12 +184,12 @@ namespace Form_Fontions
             string selectedColumnName = comboBox1.SelectedItem as string;
             string inputValue = textBox1.Text;
 
-            if (string.IsNullOrEmpty(inputValue) || (string.IsNullOrEmpty(selectedColumnName))) { FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query); }
+            if (string.IsNullOrEmpty(inputValue) || (string.IsNullOrEmpty(selectedColumnName))) { FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query); }
             else
             {
                 string whereClause = $"WHERE {selectedColumnName} LIKE '%{inputValue}%';";
 
-                FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, $"SELECT * FROM {currentView}", whereClause);
+                FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, $"SELECT * FROM {currentView}", whereClause);
             }
         }
     }
