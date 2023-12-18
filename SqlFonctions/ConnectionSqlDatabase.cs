@@ -6,7 +6,7 @@ namespace SqlFonctions
     public class ConnectionSqlDatabase
     {
         // Méthode pour obtenir une instance de MySqlConnection à partir des paramètres de connexion
-        public static MySqlConnection GetMySqlConnection(string server, string database, string username, string password)
+        public static MySqlConnection GetMySqlConnection(string server, string database, string username, string password, string port)
         {
             // Récupère la chaîne de connexion préalablement configurée
             string connectionString = CreateConnectionString.ConnectionString;
@@ -32,10 +32,10 @@ namespace SqlFonctions
         public static string ConnectionString { get; private set; }
 
         // Méthode pour définir la chaîne de connexion en fonction des paramètres fournis
-        public static void SetConnectionString(string server, string database, string username, string password)
+        public static void SetConnectionString(string server, string port, string database, string username, string password)
         {
             // Construit la chaîne de connexion en utilisant les paramètres fournis
-            ConnectionString = $"Server={server};Database={database};User={username};Password={password};";
+            ConnectionString = $"Server={server};Port={port};Database={database};User={username};Password={password};";
         }
     }
 }

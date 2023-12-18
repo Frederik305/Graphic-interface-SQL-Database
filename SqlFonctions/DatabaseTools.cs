@@ -34,7 +34,7 @@ public class DatabaseTools
     public class FillDataGrid
     {
         // Méthode pour remplir une DataGridView avec les résultats d'une requête SQL
-        public static void FillDataGridView(DataGridView dataGridView, string server, string database, string username, string password, string query, string whereClause = null)
+        public static void FillDataGridView(DataGridView dataGridView, string server, string port, string database, string username, string password, string query, string whereClause = null)
         {
 
             if (!string.IsNullOrEmpty(whereClause))
@@ -42,7 +42,7 @@ public class DatabaseTools
                 query += " " + whereClause;
             }
             // Obtenir une connexion MySQL en utilisant les informations de connexion
-            MySqlConnection connection = ConnectionSqlDatabase.GetMySqlConnection(server, database, username, password);
+            MySqlConnection connection = ConnectionSqlDatabase.GetMySqlConnection(server, port, database, username, password);
 
             try
             {
@@ -73,7 +73,7 @@ public class DatabaseTools
             catch (MySqlException ex)
             {
                 // En cas d'erreur MySQL, afficher un message d'erreur
-                MessageBox.Show($"Error: {ex.Message}");
+                // MessageBox.Show($"Error: {ex.Message}");
             }
             finally
             {

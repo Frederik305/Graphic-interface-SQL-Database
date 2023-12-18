@@ -37,5 +37,6 @@
         private TextBox passwordTextBox;
         private Button connectButton;
         private Button button1;
+        private TextBox textBox1;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using SqlFonctions;
 using System.Data;
+using ZstdSharp.Unsafe;
 using static DatabaseTools;
 
 namespace Form_Fontions
@@ -20,6 +21,7 @@ namespace Form_Fontions
         private bool IsDataInDataGrid = false;
 
         private string server;
+        private string port;
         private string database;
         private string username;
         private string password;
@@ -27,20 +29,23 @@ namespace Form_Fontions
         private MySqlConnection connection;
 
         // Constructeur de la classe ListTablesForm qui prend en paramètres les informations de connexion
-        public ListTablesForm(string server, string database, string username, string password)
+        public ListTablesForm(string server, string port, string database, string username, string password)
         {
             InitializeComponent();
 
-            connection = ConnectionSqlDatabase.GetMySqlConnection(server, database, username, password);
+            connection = ConnectionSqlDatabase.GetMySqlConnection(server, port, database, username, password);
 
             string query = $"SHOW FULL TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
-            FillDataGrid.FillDataGridView(dataGridView2, server, database, username, password, query);
+            FillDataGrid.FillDataGridView(dataGridView2, server, port, database, username, password, query);
             ComboBoxUtils.PopulateComboBoxWithColumnData(dataGridView2, 0, comboBox2);
 
             this.server = server;
+            this.port = port;
             this.database = database;
             this.username = username;
             this.password = password;
+
+            checkBoxAddData.Enabled = false;
         }
 
         private void buttonAfficher_Click(object sender, EventArgs e)
@@ -72,19 +77,19 @@ namespace Form_Fontions
         {
             if (textBox1.Text == string.Empty)
             {
-                FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+                FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
             }
             else
             {
                 string selectedColumnName = comboBox1.SelectedItem as string;
                 string inputValue = textBox1.Text;
 
-                if (string.IsNullOrEmpty(inputValue) || (string.IsNullOrEmpty(selectedColumnName))) { FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query); }
+                if (string.IsNullOrEmpty(inputValue) || (string.IsNullOrEmpty(selectedColumnName))) { FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query); }
                 else
                 {
                     string whereClause = $"WHERE {selectedColumnName} LIKE '%{inputValue}%';";
 
-                    FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, $"SELECT * FROM {currentTable}", whereClause);
+                    FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, $"SELECT * FROM {currentTable}", whereClause);
                 }
             }
         }
@@ -96,7 +101,8 @@ namespace Form_Fontions
                 checkBox1.Enabled = true;
                 dataGridView1.ReadOnly = false;
                 dataGridView1.Columns[columnNameID].ReadOnly = true;
-                if (currentTable == "epreuve") { dataGridView1.Columns[columnNameID].ReadOnly = true; }
+                if (currentTable == "epreuve") { dataGridView1.Columns[columnNameID].ReadOnly = true; dataGridView1.Columns[3].ReadOnly = true; }
+                if (currentTable == "score_vainqueur") { dataGridView1.Columns[columnNameID].ReadOnly = true; dataGridView1.Columns[1].ReadOnly = true; }
             }
             else
                 dataGridView1.ReadOnly = true;
@@ -124,7 +130,7 @@ namespace Form_Fontions
 
                 query = $"UPDATE {currentTable} SET {editedColumnName} = '{changedValue}' WHERE {columnNameID} = {valueID}";
 
-                FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+                FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
             }
         }
 
@@ -154,8 +160,12 @@ namespace Form_Fontions
 
                     if (e.ColumnIndex < row.Cells.Count)
                     {
-                        var changedValue = (string)row.Cells[e.ColumnIndex].Value;
-                        entry.ChangedValues = changedValue;
+                        var cellValue1 = row.Cells[e.ColumnIndex].Value;
+                        if (cellValue1 != null)
+                        {
+                            var changedValue = cellValue1.ToString();
+                            entry.ChangedValues = changedValue;
+                        }
                     }
                 }
 
@@ -222,7 +232,7 @@ namespace Form_Fontions
                     queries += query;
                 }
             }
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, queries);
+            FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, queries);
             AddData();
         }
 
@@ -259,7 +269,7 @@ namespace Form_Fontions
                     query = $"SELECT * FROM {currentTable}";
 
                     // Appel de la fonction FillDataGridView pour remplir la grille de données avec les résultats de la requête
-                    FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+                    FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
 
                     //popule combobox avec les columns de la table
                     ComboBoxUtils.PopulateComboBoxWithColumnNames(dataGridView1, comboBox1);
@@ -270,6 +280,12 @@ namespace Form_Fontions
                     checkBoxEdit.Enabled = true;
                     checkBox1.Enabled = false;
                     checkBoxAddData.Checked = false;
+                    checkBoxEdit.Checked = false;
+                    checkBoxAddData.Enabled = true;
+                    if (currentTable == "match_tennis")
+                    {
+                        checkBoxEdit.Enabled = false;
+                    }
 
                     IsDataInDataGrid = true;
                 }
@@ -284,7 +300,7 @@ namespace Form_Fontions
             string rowToDelete = textBox2.Text;
 
             query = $"DELETE FROM {currentTable} WHERE {firstColumnName} = {rowToDelete}";
-            FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
+            FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
             AddData();
         }
     }

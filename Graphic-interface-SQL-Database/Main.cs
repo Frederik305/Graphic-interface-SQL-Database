@@ -12,17 +12,19 @@ namespace Form_Fontions
 
         // Informations de connexion à la base de données
         private string server;
+        private string port;
         private string database;
         private string username;
         private string password;
 
         // Constructeur de la classe Main qui prend en paramètres les informations de connexion
-        public Main(string server, string database, string username, string password)
+        public Main(string server, string port, string database, string username, string password)
         {
             InitializeComponent();
 
             // Initialisation des informations de connexion à partir des paramètres
             this.server = server;
+            this.port = port;
             this.database = database;
             this.username = username;
             this.password = password;
@@ -35,7 +37,7 @@ namespace Form_Fontions
             if (ListTablesFormTest == null)
             {
                 // Si elle n'existe pas, crée une nouvelle instance en passant les informations de connexion
-                ListTablesFormTest = new ListTablesForm(server, database, username, password);
+                ListTablesFormTest = new ListTablesForm(server, port, database, username, password);
             }
 
             // Affiche la fenêtre de liste des tables en mode dialogue
@@ -49,7 +51,7 @@ namespace Form_Fontions
             if (ListRequestsFormTest == null)
             {
                 // Si elle n'existe pas, crée une nouvelle instance en passant les informations de connexion
-                ListRequestsFormTest = new ListRequestsForm(server, database, username, password);
+                ListRequestsFormTest = new ListRequestsForm(server, port, database, username, password);
             }
 
             // Affiche la fenêtre de liste des requêtes en mode dialogue

@@ -20,6 +20,7 @@ namespace Form_Fontions
             passwordTextBox = new TextBox();
             connectButton = new Button();
             button1 = new Button();
+            this.textBox1 = new TextBox();
             SuspendLayout();
             // 
             // serverTextBox
@@ -29,7 +30,7 @@ namespace Form_Fontions
             serverTextBox.MinimumSize = new Size(96, 23);
             serverTextBox.Name = "serverTextBox";
             serverTextBox.PlaceholderText = "Server Address";
-            serverTextBox.Size = new Size(220, 23);
+            serverTextBox.Size = new Size(152, 23);
             serverTextBox.TabIndex = 0;
             // 
             // databaseTextBox
@@ -85,9 +86,18 @@ namespace Form_Fontions
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new Point(238, 73);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.PlaceholderText = "Port";
+            this.textBox1.Size = new Size(62, 23);
+            this.textBox1.TabIndex = 6;
+            // 
             // DatabaseLogin
             // 
             ClientSize = new Size(536, 298);
+            Controls.Add(this.textBox1);
             Controls.Add(button1);
             Controls.Add(serverTextBox);
             Controls.Add(databaseTextBox);
@@ -105,15 +115,16 @@ namespace Form_Fontions
         {
             // Récupérer les informations du serveur, de la base de données, de l'utilisateur et du mot de passe depuis les TextBox
             string server = serverTextBox.Text;
+            string port = textBox1.Text;
             string database = databaseTextBox.Text;
             string username = usernameTextBox.Text;
             string password = passwordTextBox.Text;
 
             // Définir la chaîne de connexion en utilisant les informations ci-dessus
-            CreateConnectionString.SetConnectionString(server, database, username, password);
+            CreateConnectionString.SetConnectionString(server, port, database, username, password);
 
             // Obtenir une connexion MySQL
-            MySqlConnection connection = ConnectionSqlDatabase.GetMySqlConnection(server, database, username, password);
+            MySqlConnection connection = ConnectionSqlDatabase.GetMySqlConnection(server, port, database, username, password);
 
             if (connection != null)
             {
@@ -126,7 +137,7 @@ namespace Form_Fontions
                     if (OpenMain == null)
                     {
                         // Créer une nouvelle instance de la fenêtre Main avec les informations de connexion
-                        OpenMain = new Main(server, database, username, password);
+                        OpenMain = new Main(server, port, database, username, password);
                     }
                     // Afficher la fenêtre Main
                     OpenMain.ShowDialog();
@@ -155,15 +166,16 @@ namespace Form_Fontions
             // pour le serveur, la base de données, l'utilisateur et le mot de passe.
 
             string server = "127.0.0.1";
+            string port = "3308";
             string database = "evenementsport";
             string username = "root";
             string password = "";
 
             // Définir la chaîne de connexion en utilisant les valeurs par défaut
-            CreateConnectionString.SetConnectionString(server, database, username, password);
+            CreateConnectionString.SetConnectionString(server, port, database, username, password);
 
             // Obtenir une connexion MySQL
-            MySqlConnection connection = ConnectionSqlDatabase.GetMySqlConnection(server, database, username, password);
+            MySqlConnection connection = ConnectionSqlDatabase.GetMySqlConnection(server, port, database, username, password);
 
             if (connection != null)
             {
@@ -176,7 +188,7 @@ namespace Form_Fontions
                     if (OpenMain == null)
                     {
                         // Créer une nouvelle instance de la fenêtre Main avec les valeurs par défaut
-                        OpenMain = new Main(server, database, username, password);
+                        OpenMain = new Main(server, port, database, username, password);
                     }
                     // Afficher la fenêtre Main
                     OpenMain.ShowDialog();
