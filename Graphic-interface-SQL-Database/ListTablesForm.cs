@@ -130,12 +130,10 @@ namespace Form_Fontions
 
                 query = $"UPDATE {currentTable} SET {editedColumnName} = '{changedValue}' WHERE {columnNameID} = {valueID}";
 
-<<<<<<< HEAD
-                FillDataGrid.FillDataGridView(dataGridView1, server, database, username, password, query);
-                AddData();
-=======
                 FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
->>>>>>> c1937b5324622c4f4d7a8e5a7a194f3ef4c8d13a
+                AddData();
+
+                FillDataGrid.FillDataGridView(dataGridView1, server, port, database, username, password, query);
             }
         }
 
@@ -291,10 +289,7 @@ namespace Form_Fontions
                     {
                         checkBoxEdit.Enabled = false;
                     }
-<<<<<<< HEAD
-=======
 
->>>>>>> c1937b5324622c4f4d7a8e5a7a194f3ef4c8d13a
                     IsDataInDataGrid = true;
                 }
             }
